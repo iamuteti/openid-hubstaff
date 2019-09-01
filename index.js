@@ -50,7 +50,7 @@ app.get('/cb', (req, res) => {
             if (params.error)
                 return res.json(params);
 
-            client.callback('http://localhost:3000/cb', params, { nonce })
+            client.callback('https://dry-inlet-69732.herokuapp.com/cb', params, { nonce })
                 .then(function (tokenSet) {
                     console.log('received and validated tokens %j', tokenSet);
                     console.log('validated ID Token claims %j', tokenSet.claims());
