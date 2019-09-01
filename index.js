@@ -12,14 +12,13 @@ app.get('/', (req, res) => {
             const client = new hubIssuer.Client({
                 client_id: 'P3SK_NBGgupNFpSHQOJnINM1prX7jIHU6VneXHxdNA8',
                 client_secret: 'CdJE46ODjqLTMRE0KUCKDVf7q39Lg4gcdJWAXl_54PBrkodTWlUTt9katzHEEcgvorATOsycex7dtEXWlPHmPA',
-                redirect_uris: ['http://localhost:3000/cb'],
+                redirect_uris: ['http://localhost:3000/cb', 'https://dry-inlet-69732.herokuapp.com/cb'],
                 response_types: ['code']
             });
 
             const url = client.authorizationUrl({
                 scope: 'openid profile email',
                 resource: hubIssuer.authorization_endpoint,
-                redirect_uri: "http://localhost:3000/cb",
                 code_challenge,
                 code_challenge_method: 'S256',
                 nonce: 1
@@ -41,7 +40,7 @@ app.get('/cb', (req, res) => {
             const client = new hubIssuer.Client({
                 client_id: 'P3SK_NBGgupNFpSHQOJnINM1prX7jIHU6VneXHxdNA8',
                 client_secret: 'CdJE46ODjqLTMRE0KUCKDVf7q39Lg4gcdJWAXl_54PBrkodTWlUTt9katzHEEcgvorATOsycex7dtEXWlPHmPA',
-                redirect_uris: ['http://localhost:3000/cb'],
+                redirect_uris: ['http://localhost:3000/cb', 'https://dry-inlet-69732.herokuapp.com/cb'],
                 response_types: ['code']
             });
 
