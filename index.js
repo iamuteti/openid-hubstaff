@@ -1,11 +1,15 @@
 const express = require('express');
 const {Issuer, generators} = require('openid-client');
+const favicon = require('serve-favicon');;
+const path = require('path');
 const code_verifier = generators.codeVerifier();
 const code_challenge = generators.codeChallenge(code_verifier);
 const nonce = generators.nonce();
 
 const app = express();
 const port = 3000;
+
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
 app.get('/', (req, res) => {
     Issuer.discover('https://account.hubstaff.com')
