@@ -2,6 +2,7 @@ const express = require('express');
 const {Issuer, generators} = require('openid-client');
 const code_verifier = generators.codeVerifier();
 const code_challenge = generators.codeChallenge(code_verifier);
+const nonce = generators.nonce();
 
 const app = express();
 const port = 3000;
@@ -21,7 +22,7 @@ app.get('/', (req, res) => {
                 resource: hubIssuer.authorization_endpoint,
                 code_challenge,
                 code_challenge_method: 'S256',
-                nonce: 1
+                nonce
             });
 
             return res.json({url})
@@ -49,7 +50,7 @@ app.get('/cb', (req, res) => {
             if (params.error)
                 return res.json(params);
 
-            client.callback('http://localhost:3000/cb', params, { code_verifier })
+            client.callback('http://localhost:3000/cb', params, { nonce })
                 .then(function (tokenSet) {
                     console.log('received and validated tokens %j', tokenSet);
                     console.log('validated ID Token claims %j', tokenSet.claims());
