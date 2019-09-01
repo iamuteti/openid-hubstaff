@@ -47,9 +47,9 @@ app.get('/cb', (req, res) => {
 
             const params = client.callbackParams(req);
 
-            if (params.error) {
-                return res.json(params)
-            }
+            if (params.error)
+                return res.json(params);
+
             client.callback('http://localhost:3000/cb', params, { code_verifier })
                 .then(function (tokenSet) {
                     console.log('received and validated tokens %j', tokenSet);
